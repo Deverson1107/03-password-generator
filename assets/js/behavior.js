@@ -8,6 +8,7 @@ var specialchar;
 var specialanswer = null;
 var length = 0;
 
+
 // Opening Alert for the user.
 alert("Welcome to my password generator! You will be asked to choose from the following password criteria:")
 
@@ -95,12 +96,13 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
     }
 
 // Determine the length of the password.
-    while (length > 128 || length < 8 || typeof length === "string") {
+    while (length > 128 || length < 8 || length === NaN) {
    
         length = prompt("How long do you want this password to be? (Must be between 8 and 128 characters)");
-        
+
+        length = parseInt(length, 10);
     
-        if (length < 128 && length > 8) {
+        if (length < 128 && length > 8 && typeof length === "number") {
             alert("Your password will be " + length + " characters long.")
             console.log(length);
             console.log(typeof length);
@@ -108,6 +110,7 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
 
         else {
             alert("Your password must be between 8 and 128 characters and be a number.")
+            console.log(length);
             console.log(typeof length);
         }
 }
