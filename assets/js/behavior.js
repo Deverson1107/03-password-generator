@@ -6,15 +6,13 @@ var numeric;
 var numericanswer = null;
 var specialchar;
 var specialanswer = null;
-var length = 0;
-
+var size = 0;
 
 // Opening Alert for the user.
 alert("Welcome to my password generator! You will be asked to choose from the following password criteria:")
 
 while (upperanswer === null && loweranswer === null && numericanswer === null && specialanswer === null ) {
-
-    
+   
 // Asking for the use of upper-case letters in the password.
     while (uppercase !== "yes" && uppercase !== "no") {
    
@@ -95,51 +93,99 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
         }
     }
 
-// Determine the length of the password.
-    while (length > 128 || length < 8 || length === NaN) {
+// Determine the size of the password.
+    while (size > 128 || size < 8 || size === 0) {
    
-        length = prompt("How long do you want this password to be? (Must be between 8 and 128 characters)");
+        size = prompt("How long do you want this password to be? (Must be between 8 and 128 characters)");
 
-        length = parseInt(length, 10);
-    
-        if (length < 128 && length > 8 && typeof length === "number") {
-            alert("Your password will be " + length + " characters long.")
-            console.log(length);
-            console.log(typeof length);
-        }
+        size = parseInt(size, 10);
 
+        if (size < 128 && size > 8 && size !== NaN) {
+            console.log(size);
+            alert("Your password will be " + size + " characters long.");
+        } 
         else {
-            alert("Your password must be between 8 and 128 characters and be a number.")
-            console.log(length);
-            console.log(typeof length);
+            console.log(size);
+            alert("Please enter a valid answer.");
+            size = 0;
         }
-}
+    }
 
 // Keeps the user from inputing all criteria as false.
-if (upperanswer === false && loweranswer === false && numericanswer === false && specialanswer === false){
-    uppercase = null;
-    upperanswer = null;
-    lowercase = null;
-    loweranswer = null;
-    numeric = null;
-    numericanswer = null;
-    specialchar = null;
-    specialanswer = null;
-    length = 0;
-    alert("You must choose at least one of the criteria. Please start again.");
-    
+    if (upperanswer === false && loweranswer === false && numericanswer === false && specialanswer === false){
+        uppercase = null;
+        upperanswer = null;
+        lowercase = null;
+        loweranswer = null;
+        numeric = null;
+        numericanswer = null;
+        specialchar = null;
+        specialanswer = null;
+        length = 0;
+        alert("You must choose at least one of the criteria. Please start again.");
+    }
+    else {
+        alert("Thank you.");
+    }
+
+}
+
+//Setting up where the password will be generated and the genrate button.
+var password = document.querySelector(".pass");
+var newpassword = document.querySelector(".button1");
+
+//Setting up all possible strings.
+if (upperanswer === true) {
+    var upCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
 }
 else {
-    alert("Thank you.");
+    var upCharacters = "";
 }
 
+if (loweranswer === true) {
+    var lowCharacters = "abcdefghijklmnopqrstuvwxyz";
+}
+else {
+    var lowCharacters = "";
 }
 
-// ASK HOW TO CONVERT DATA TYPE
-// ASK WHERE TO PUT IN .toLowercase
+if (numericanswer === true) {
+    var numCharacters = "1234567890";
+}
+else {
+    var numCharacters = "";
+}
+
+if (specialanswer === true) {
+    var specCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~"; 
+}
+else {
+    var specCharacters = "";
+}
+
+//Generating the password.
+function makepass(length) {
+    var result = '';
+    var characters = upCharacters + lowCharacters + numCharacters + specCharacters;
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+password.textContent = makepass(size);
+
+//Copy the password to the clipboard.
 
 
 
+
+
+
+
+
+  
 
       
 
