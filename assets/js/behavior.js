@@ -17,15 +17,14 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
     while (uppercase !== "yes" && uppercase !== "no") {
    
         uppercase = prompt("Do you want upper-case characters? (Please answer yes or no)");
+        uppercase = uppercase.toLowerCase();
     
         if (uppercase === "yes") {
             upperanswer = true;
-            console.log(upperanswer);
         }
     
         else if (uppercase === "no") {
             upperanswer = false;
-            console.log(upperanswer);
         }
 
         else {
@@ -34,18 +33,17 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
     }
 
 // Asking for the use of lower-case letters in the password.
-        while (lowercase !== "yes" && lowercase !== "no") {
+    while (lowercase !== "yes" && lowercase !== "no") {
    
         lowercase = prompt("Do you want lower-case characters? (Please answer yes or no)");
+        lowercase = lowercase.toLowerCase();
     
         if (lowercase === "yes") {
             loweranswer = true;
-            console.log(loweranswer);
         }
     
         else if (lowercase === "no") {
             loweranswer = false;
-            console.log(loweranswer);
         }
 
         else {
@@ -57,15 +55,14 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
     while (numeric !== "yes" && numeric !== "no") {
    
         numeric = prompt("Do you want numeric characters? (Please answer yes or no)");
+        numeric = numeric.toLowerCase();
     
         if (numeric === "yes") {
             numericanswer = true;
-            console.log(numericanswer);
         }
     
         else if (numeric === "no") {
             numericanswer = false;
-            console.log(numericanswer);
         }
 
     else {
@@ -77,15 +74,14 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
     while (specialchar !== "yes" && specialchar !== "no") {
    
         specialchar = prompt("Do you want special characters? (Please answer yes or no)");
+        specialchar = specialchar.toLowerCase();
     
         if (specialchar === "yes") {
             specialanswer = true;
-            console.log(specialanswer);
         }
     
         else if (specialchar === "no") {
             specialanswer = false;
-            console.log(specialanswer);
         }
 
         else {
@@ -100,12 +96,10 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
 
         size = parseInt(size, 10);
 
-        if (size < 128 && size > 8 && size !== NaN) {
-            console.log(size);
+        if (size <= 128 && size >= 8 && size !== NaN) {
             alert("Your password will be " + size + " characters long.");
         } 
         else {
-            console.log(size);
             alert("Please enter a valid answer.");
             size = 0;
         }
@@ -130,9 +124,8 @@ while (upperanswer === null && loweranswer === null && numericanswer === null &&
 
 }
 
-//Setting up where the password will be generated and the genrate button.
+//Setting up where the password will be generated and the buttons.
 var password = document.querySelector(".pass");
-var newpassword = document.querySelector(".button1");
 
 //Setting up all possible strings.
 if (upperanswer === true) {
@@ -165,7 +158,7 @@ else {
 
 //Generating the password.
 function makepass(length) {
-    var result = '';
+    var result = "";
     var characters = upCharacters + lowCharacters + numCharacters + specCharacters;
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
@@ -173,10 +166,44 @@ function makepass(length) {
     }
     return result;
 }
-
 password.textContent = makepass(size);
 
+//Selecting the buttons from the DOM.
+var newpassword = document.querySelector(".button1");
+var copypassword = document.querySelector(".button2");
+
+//Create new password.
+newpassword.addEventListener("click", function (event) {
+    event.preventDefault();
+    password.textContent = makepass(size);
+});
+
 //Copy the password to the clipboard.
+copypassword.addEventListener("click", function () {
+    var inputpass = document.createElement('input');
+    document.body.appendChild(inputpass);
+    inputpass.value = password.textContent;
+    inputpass.select();
+    document.execCommand("copy");
+    inputpass.remove();
+    alert ("Copied password to the clipboard.");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

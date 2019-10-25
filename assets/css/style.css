@@ -4,6 +4,10 @@ html {
     color: rgb(87, 87, 87);
 }
 
+h1 {
+    font-weight: bold;
+}
+
 h2 {
     border-bottom: rgb(231, 231, 231) 2px solid;
     margin-left: auto;
